@@ -1,0 +1,21 @@
+
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600&subset=cyrillic');
+
+@import "~open-color/open-color.scss";
+
+@import '~bootstrap/scss/bootstrap';
+
+@import "~orchid-icons/src/scss/orchid-icons";
+
+// including variables and mixins
+@import "theme/variables";
+@import "theme/mixins";
+@import "theme/flexbox";
+@import "theme/reset";
+
+
+// Custom Scss
+@import "theme/elements";
+@import "theme/header";
+@import "theme/home";
+@import "theme/footer";
