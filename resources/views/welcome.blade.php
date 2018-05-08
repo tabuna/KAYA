@@ -11,7 +11,7 @@
             <div class="story-content">
                 <h6 class="text-uppercase">Отслеживаем ошибки в программном обеспечении</h6>
                 <h1>За каждым <span class="sp-1">Успехом</span><br>
-                    находится <span class="sp-2">KAYA</span></h1>
+                    находится <span class="sp-2">Kaya</span></h1>
                 <a href="#" class="genric-btn primary circle arrow">Начать сейчас<span class="icon-arrow-right"></span></a>
             </div>
         </div>
