@@ -45,8 +45,9 @@ class TeamController extends Controller
         $teamModel = config('teamwork.team_model');
 
         $team = $teamModel::create([
-            'name' => $request->name,
-            'owner_id' => $request->user()->getKey()
+            'name'     => $request->name,
+            'owner_id' => $request->user()->getKey(),
+            'token'    => bcrypt($request->name . $request->user()->getKey())
         ]);
         $request->user()->attachTeam($team);
 

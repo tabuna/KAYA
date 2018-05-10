@@ -1,11 +1,34 @@
 
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600&subset=cyrillic');
 
+// default
 @import "~open-color/open-color.scss";
-
 @import '~bootstrap/scss/bootstrap';
-
 @import "~orchid-icons/src/scss/orchid-icons";
+
+
+//orchid
+
+@import "../../../vendor/orchid/platform/resources/assets/sass/theme/variables";
+@import "../../../vendor/orchid/platform/resources/assets/sass/core/mixins";
+@import "../../../vendor/orchid/platform/resources/assets/sass/core/reset";
+@import "../../../vendor/orchid/platform/resources/assets/sass/core/layout";
+@import "../../../vendor/orchid/platform/resources/assets/sass/core/nav";
+@import "../../../vendor/orchid/platform/resources/assets/sass/core/arrow";
+@import "../../../vendor/orchid/platform/resources/assets/sass/core/buttons";
+@import "../../../vendor/orchid/platform/resources/assets/sass/core/modals";
+@import "../../../vendor/orchid/platform/resources/assets/sass/core/components";
+@import "../../../vendor/orchid/platform/resources/assets/sass/plugins/plugin";
+@import "../../../vendor/orchid/platform/resources/assets/sass/core/item";
+@import "../../../vendor/orchid/platform/resources/assets/sass/theme/colors";
+@import "../../../vendor/orchid/platform/resources/assets/sass/core/utilities";
+@import "../../../vendor/orchid/platform/resources/assets/sass/core/tables";
+@import "../../../vendor/orchid/platform/resources/assets/sass/core/form";
+@import "../../../vendor/orchid/platform/resources/assets/sass/plugins/load-opacity";
+@import "../../../vendor/orchid/platform/resources/assets/sass/plugins/notfound";
+
+
+
 
 // including variables and mixins
 @import "theme/variables";
@@ -15,7 +38,6 @@
 
 
 // Custom Scss
-@import "theme/elements";
+//@import "theme/elements";
 @import "theme/header";
 @import "theme/home";
-@import "theme/footer";

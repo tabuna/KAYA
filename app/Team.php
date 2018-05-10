@@ -2,12 +2,15 @@
 
 namespace App;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Mpociot\Teamwork\Traits\TeamworkTeamTrait;
+use Orchid\Platform\Traits\FilterTrait;
+use Orchid\Platform\Traits\MultiLanguage;
 
 class Team extends Model
 {
-    use TeamworkTeamTrait;
+    use TeamworkTeamTrait, Sluggable, MultiLanguage, FilterTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -17,7 +20,8 @@ class Team extends Model
     protected $fillable = [
         'name',
         'owner_id',
-        'slug'
+        'slug',
+        'token'
     ];
 
     /**
@@ -30,11 +34,24 @@ class Team extends Model
     ];
 
     /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function getLog()
     {
         return $this->hasMany(Log::class);
     }
-
 }
