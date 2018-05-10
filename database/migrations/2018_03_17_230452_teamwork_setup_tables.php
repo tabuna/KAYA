@@ -24,6 +24,8 @@ class TeamworkSetupTables extends Migration
             $table->increments( 'id' )->unsigned();
             $table->integer( 'owner_id' )->unsigned()->nullable();
             $table->string( 'name' );
+            $table->string('slug')->unique();
+            $table->string('token');
             $table->timestamps();
         } );
 

@@ -22,12 +22,11 @@ class CreateLogsTable extends Migration
                 $table->string('level')->index();
                 $table->string('level_name');
                 $table->text('message');
-                $table->json('context');
+                $table->jsonb('context');
 
                 $table->integer('remote_address')->nullable()->unsigned();
                 $table->string('user_agent')->nullable();
                 $table->bigInteger('team_id')->nullable()->index();
-
                 $table->dateTime('created_at');
             }
         );
