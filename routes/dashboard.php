@@ -12,6 +12,7 @@
 */
 
 
-Route::screen('/teams2', 'Screens\Teams\TeamsList','dashboard.screens.teams.list');
+Route::screen('/projects', 'Screens\Teams\TeamsList','dashboard.screens.teams.list');
 
-Route::get('/{project}/logs','Log\LogController@index');
+Route::get('/logs/{project}','Log\LogController@index')
+    ->name('logs.show');

@@ -64,8 +64,8 @@ return [
 
     'auth' => [
         'display' => true,
-        'image'   => '/orchid/img/background.jpg',
-        'slogan'  => 'dashboard::auth/account.slogan',
+        'image'   => '/wallpaper.jpg',
+        'slogan'  => 'Унифицированный анализ и мониторинг журналов',
     ],
 
     /*

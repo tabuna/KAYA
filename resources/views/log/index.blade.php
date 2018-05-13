@@ -9,11 +9,11 @@
         <div class="hbox-col w-md bg-white-only b-r bg-auto no-border-xs">
             <ul class="list-group">
 
-                @foreach($groupRemoteAddress as $ip => $address)
+                @foreach($groupRemoteAddress as $log)
                     <li class="list-group-item" style="border-right: none">
                         <a href="" class="block">
-                            <span class="badge bg-dark text-white pull-right">{{count($address)}}</span>
-                            {{$ip or 'unknown'}}
+                            <span class="badge bg-dark text-white pull-right">{{$log->count}}</span>
+                            {{$log->remote_address}}
                         </a>
                     </li>
                 @endforeach
@@ -21,15 +21,27 @@
             </ul>
         </div>
         <div class="hbox-col">
-            <div class="wrapper bg-white b-b">
+            <div class="wrapper-xs bg-white b-b">
                 <div id="chart"></div>
             </div>
-            <div class="wrapper-md">
-                <div class="row">
-                    <div class="col-sm-12">
-
+            <div class="wrapper-md bg-white">
+                @foreach($logs as $log)
+                    <div class="row m-b-md b-b">
+                        <div class="col-sm-12 m-b">
+                            <p class="small">
+                                <span class="text-black"> {{$log->remote_address}}</span>
+                                <time class="pull-right" title="{{$log->created_at}}">{{$log->created_at->toDateString()}}</time>
+                            </p>
+                            <code>
+                                @include('log.json',[
+                                    'item'      => $log->message,
+                                    'mainKey'   => '',
+                                    'padding'   => 0
+                                ])
+                            </code>
+                        </div>
                     </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -57,7 +69,7 @@
                     }
                 ]
             },
-            title: "My Awesome Chart",
+            title: "Статистика за последние дни",
             type: 'line', // or 'bar', 'line', 'pie', 'percentage'
             height: 150,
 

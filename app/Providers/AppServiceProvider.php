@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Http\Composers\MenuDashboardComposer;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        View::composer('dashboard::layouts.dashboard', MenuDashboardComposer::class);
     }
 
     /**
