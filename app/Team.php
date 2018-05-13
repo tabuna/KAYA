@@ -50,7 +50,7 @@ class Team extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function getLog()
+    public function log()
     {
         return $this->hasMany(Log::class);
     }

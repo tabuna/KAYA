@@ -12,4 +12,12 @@
 |
 */
 
-Route::post('/logs/{team}', 'Api\LoggerController@write');
+Route::get('/logs', 'Api\LoggerController@write');
+
+Route::get('/logs2',function (){
+    \App\Log::create([
+        'team_id' => 1,
+        'message' => [],
+        'remote_address' => 12,
+    ]);
+});
