@@ -6,8 +6,7 @@
                 @if(!is_array($value))
                     <div>
                 @endif
-
-
+                        
                 "{{ $key }}": @include('log.json', [
                     'item' => $value,
                     'mainKey' => $mainKey .'.'. $key,

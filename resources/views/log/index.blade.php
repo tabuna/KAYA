@@ -21,6 +21,23 @@
             </ul>
         </div>
         <div class="hbox-col">
+
+            <div class="wrapper-md bg-white b-b">
+                <form class="form-horizontal" method="get">
+
+                    <label class="control-label">Фильтр:</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-default" type="button"><i class="icon-filter"></i></button>
+                            <button class="btn btn-default" type="button"><i class="icon-doc"></i></button>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Поисковый запрос" aria-label="" aria-describedby="basic-addon1">
+                    </div>
+
+                </form>
+            </div>
+
+
             <div class="wrapper-xs bg-white b-b">
                 <div id="chart"></div>
             </div>

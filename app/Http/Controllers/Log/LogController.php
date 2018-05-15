@@ -16,18 +16,18 @@ class LogController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(Team $team, Request $request)
+    public  function index(Team $team, Request $request)
     {
         $logs = Log::filters()
             ->where('team_id', $team->id)
-            ->where('created_at','>',date('Y-m-d'))
+            ->where('created_at','<',date('Y-m-d'))
             ->simplePaginate();
 
 
         $groupRemoteAddress = Log::filters()
             ->select('remote_address',DB::raw('count(remote_address) as count'))
             ->where('team_id', $team->id)
-            ->where('created_at','>',date('Y-m-d'))
+            ->where('created_at','<',date('Y-m-d'))
             ->groupBy('remote_address')
             ->orderByDesc('count')
             ->get();
