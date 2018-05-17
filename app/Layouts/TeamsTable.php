@@ -23,7 +23,7 @@ class TeamsTable extends Table
                 ->width(100)
                 ->align('center')
                 ->sort()
-                ->link('dashboard.index',''),
+                ->link('dashboard.screens.teams.edit','slug'),
             TD::set('name','Название')
                 ->sort()
                 ->width(300),

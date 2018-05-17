@@ -30,6 +30,7 @@ class LogController extends Controller
             ->where('created_at','<',date('Y-m-d'))
             ->groupBy('remote_address')
             ->orderByDesc('count')
+            ->limit(30)
             ->get();
 
         return view('log.index', [

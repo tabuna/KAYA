@@ -12,7 +12,10 @@
 */
 
 
+Route::screen('/projects/{project}', 'Screens\Teams\TeamsEdit','dashboard.screens.teams.edit');
 Route::screen('/projects', 'Screens\Teams\TeamsList','dashboard.screens.teams.list');
 
+
+
 Route::get('/logs/{project}','Log\LogController@index')
-    ->name('logs.show');
+    ->name('dashboard.screens.logs.show');
