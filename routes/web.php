@@ -31,3 +31,7 @@ Route::group(['prefix' => 'teams', 'namespace' => 'Teamwork'], function()
 
     Route::get('accept/{token}', 'AuthController@acceptInvite')->name('teams.accept_invite');
 });
+
+
+Route::get('/demo', 'DemoApiController@index');
+Route::get('/demo/send', 'DemoApiController@send')->name('demo.send');

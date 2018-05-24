@@ -34,15 +34,15 @@ class MenuDashboardComposer
                 'route'  => '#',
                 'label'  => 'Журнал',
                 'sort'   => 2,
-                'active' => 'dashboard.screens.logs.*',
+                'active' => 'platform.screens.logs.*',
                 'childs' => true
             ])->add('Main', [
                 'slug'   => 'Teams',
                 'icon'   => 'icon-people',
-                'route'  => route('dashboard.screens.teams.list'),
+                'route'  => route('platform.screens.teams.list'),
                 'label'  => 'Проекты',
                 'sort'   => 2,
-                'active' => 'dashboard.screens.teams.*',
+                'active' => 'platform.screens.teams.*',
             ]);
 
         foreach (Auth::user()->teams as $key => $team) {
@@ -50,7 +50,7 @@ class MenuDashboardComposer
             $teamMenu = [
                 'slug'  => $team->slug,
                 'icon'  => 'icon-layers',
-                'route' => route('dashboard.screens.logs.show',$team->slug),
+                'route' => route('platform.screens.logs.show',$team->slug),
                 'label' => $team->name,
                 'sort'  => $key,
             ];

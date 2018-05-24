@@ -26,6 +26,11 @@ class RouteServiceProvider extends ServiceProvider
     {
         //
         Route::bind('project',function ($query){
+
+            if(is_numeric($query)){
+                return Team::findOrFail($query);
+            }
+
             return Team::where('slug',$query)->firstOrFail();
         });
 

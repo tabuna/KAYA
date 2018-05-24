@@ -26,10 +26,15 @@ class TeamEdit extends Rows
 
             Field::tag('input')
                 ->type('text')
+                ->name('team.slug')
+                ->readonly()
+                ->title('Системное имя проекта'),
+
+            Field::tag('input')
+                ->type('text')
                 ->name('team.token')
                 ->readonly()
-                ->title('Название проекта')
-                ->help('Как называется команда?'),
+                ->title('API ключ для проекта'),
         ];
     }
 }

@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('dashboard::layouts.dashboard', MenuDashboardComposer::class);
+        View::composer('platform::layouts.dashboard', MenuDashboardComposer::class);
     }
 
     /**

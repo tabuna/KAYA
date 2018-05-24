@@ -21,7 +21,7 @@ class LoggerController extends Controller
 
         Log::create([
             'team_id' => $team->id,
-            'message' => $request->get('message'),
+            'message' => json_decode($request->get('message')),
             'remote_address' => $request->getClientIp(),
         ]);
 

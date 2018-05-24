@@ -20,7 +20,8 @@ class MembersTable extends Table
     public function fields(): array
     {
         return [
-            TD::set('name','Name'),
+            TD::set('name','Пользователи'),
+            /*
             TD::set('name','Action')
                 ->width(100)
                 ->setRender(function (User $user){
@@ -28,6 +29,7 @@ class MembersTable extends Table
                     'user' => $user
                 ]);
             }),
+            */
         ];
     }
 }
