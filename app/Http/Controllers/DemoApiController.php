@@ -50,17 +50,21 @@ class DemoApiController extends Controller
             ],
         ];
 
-        $result = file_get_contents(route('api.logs.write'), false, stream_context_create([
-            'http' => [
-                'method'  => 'POST',
-                'header'  => 'Content-type: application/x-www-form-urlencoded',
-                'content' => http_build_query([
-                    'name'    => $request->get('name'),
-                    'message' => $message,
-                    'token'   => $request->get('token'),
-                ]),
-            ],
-        ]));
+        try {
+            $result = file_get_contents(route('api.logs.write'), false, stream_context_create([
+                'http' => [
+                    'method'  => 'POST',
+                    'header'  => 'Content-type: application/x-www-form-urlencoded',
+                    'content' => http_build_query([
+                        'name'    => trim($request->get('name')),
+                        'message' => json_encode($message),
+                        'token'   => trim($request->get('token')),
+                    ]),
+                ],
+            ]));
+        }catch (\Exception $exception){
+            $result =  $exception->getCode();
+        }
 
         return redirect()->back()
             ->withInput([
