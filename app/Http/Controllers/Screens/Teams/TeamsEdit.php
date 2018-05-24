@@ -6,6 +6,7 @@ use App\Layouts\MembersTable;
 use App\Layouts\TeamEdit;
 use App\Layouts\TeamsInvite;
 use App\Team;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Mpociot\Teamwork\Facades\Teamwork;
@@ -68,7 +69,7 @@ class TeamsEdit extends Screen
             $commandBar[] = Link::name('Удалить')
                 ->slug('project')
                 ->icon('icon-check m-r-xs')
-                ->method('update');
+                ->method('delete');
         }
 
 
@@ -114,6 +115,28 @@ class TeamsEdit extends Screen
         Alert::success('Вы успешно обновили описание');
 
         return back();
+    }
+
+    /**
+     * @param Team $team
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Exception
+     */
+    public function delete(Team $team)
+    {
+        if (!auth()->user()->isOwnerOfTeam($team)) {
+            abort(403);
+        }
+
+        $team->delete();
+
+        User::where('current_team_id', $team->id)
+            ->update(['current_team_id' => null]);
+
+
+        Alert::success('Проект был удалён');
+
+        return redirect('/');
     }
 
     /**
