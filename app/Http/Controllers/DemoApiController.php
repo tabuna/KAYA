@@ -51,7 +51,7 @@ class DemoApiController extends Controller
         ];
 
         try {
-            $result = file_get_contents(route('api.logs.write'), false, stream_context_create([
+            $result = file_get_contents('https://kaya.orchid.software/api/logs', false, stream_context_create([
                 'http' => [
                     'method'  => 'POST',
                     'header'  => 'Content-type: application/x-www-form-urlencoded',
