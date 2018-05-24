@@ -11,7 +11,7 @@
 
                 @foreach($groupRemoteAddress as $log)
                     <li class="list-group-item" style="border-right: none">
-                        <a href="" class="block">
+                        <a href='javascript:;' class="block">
                             <span class="badge bg-dark text-white pull-right">{{$log->count}}</span>
                             {{$log->remote_address}}
                         </a>
@@ -39,7 +39,7 @@
 
 
                 @foreach($tags as $key => $value)
-                    <a href="#" class="removeTags list-group-item text-ellipsis" data-key="{{$key}}">
+                    <a href='javascript:;' class="removeTags list-group-item text-ellipsis" data-key="{{$key}}">
                         <span class="badge bg-dark text-white m-r-xs">{{str_after($key,'->')}}</span>
                        {{$value}}
                     </a>
@@ -85,8 +85,9 @@
                     key: $(this).data('key'),
                     value:  $(this).data('value')
                 }
+            }).then(function (response) {
+                Turbolinks.visit(window.location)
             });
-            Turbolinks.visit(window.location)
         });
 
         $('.removeTags').click(function () {
@@ -96,8 +97,9 @@
                 data: {
                     key: $(this).data('key'),
                 }
+            }) .then(function (response) {
+                Turbolinks.visit(window.location)
             });
-            Turbolinks.visit(window.location)
         });
 
 

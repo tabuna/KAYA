@@ -20,7 +20,7 @@
         @endforeach
     </div>
 @else
-            <a href="#" class="addTags" data-key="{{$mainKey}}" data-value="{{$item}}">{{$item}}</a>
+            <a href='javascript:;' class="addTags" data-key="{{$mainKey}}" data-value="{{$item}}">{{$item}}</a>
         @php
             $mainKey='';
             $padding=0;
