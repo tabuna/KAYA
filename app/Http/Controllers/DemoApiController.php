@@ -51,9 +51,9 @@ class DemoApiController extends Controller
         ];
 
         try {
-            $result = file_get_contents(route('api.logs.write'), false, stream_context_create([
+            $result = file_get_contents('https://kaya.orchid.software/api/logs', false, stream_context_create([
                 'http' => [
-                    'method'  => 'POST',
+                    'method'  => 'GET',
                     'header'  => 'Content-type: application/x-www-form-urlencoded',
                     'content' => http_build_query([
                         'name'    => trim($request->get('name')),
@@ -63,7 +63,7 @@ class DemoApiController extends Controller
                 ],
             ]));
         }catch (\Exception $exception){
-            $result =  $exception->getCode();
+            $result =  $exception->getMessage();
         }
 
         return redirect()->back()
