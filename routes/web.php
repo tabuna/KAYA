@@ -34,4 +34,5 @@ Route::group(['prefix' => 'teams', 'namespace' => 'Teamwork'], function()
 
 
 Route::get('/demo', 'DemoApiController@index');
-Route::get('/demo/send', 'DemoApiController@send')->name('demo.send');
+Route::post('/demo', 'DemoApiController@send')
+    ->name('demo.send');

@@ -35,7 +35,7 @@
     <div class="bg-white wrapper-lg b box-shadow-lg">
     <h1 class="h3 font-thin m-b-md">Demo API Client</h1>
     <hr>
-    <form action="{{route('demo.send')}}">
+    <form action="{{route('demo.send')}}" method="post" autocomplete="off">
 
         @if (count($errors) > 0)
             <div class="alert alert-info m-b-none" role="alert">
@@ -57,6 +57,8 @@
             <input type="text" name="token" value="{{old('token')}}" required class="form-control">
             <small class="form-text text-muted">Ключ аутентификация</small>
         </div>
+
+            {{csrf_field()}}
         <button type="submit" class="btn btn-sm btn-primary">Сгенерировать случайную ошибку</button>
     </form>
     </div>
