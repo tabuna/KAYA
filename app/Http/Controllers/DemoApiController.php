@@ -56,7 +56,7 @@ class DemoApiController extends Controller
                 'header'  => 'Content-type: application/x-www-form-urlencoded',
                 'content' => http_build_query([
                     'name'    => $request->get('name'),
-                    'message' => json_encode($message),
+                    'message' => $message,
                     'token'   => $request->get('token'),
                 ]),
             ],
