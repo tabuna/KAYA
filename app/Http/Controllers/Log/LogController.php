@@ -35,6 +35,8 @@ class LogController extends Controller
 
         $tags = $request->session()->get($team->slug.'-tags', []);
         foreach ($tags as $key => $tag){
+            $tag = strval($tag);
+
             $logs->where('message'.$key, $tag);
             $groupRemoteAddress->where('message'.$key, $tag);
         }
