@@ -86,6 +86,7 @@
                     value:  $(this).data('value')
                 }
             });
+            Turbolinks.visit(window.location)
         });
 
         $('.removeTags').click(function () {
@@ -96,6 +97,7 @@
                     key: $(this).data('key'),
                 }
             });
+            Turbolinks.visit(window.location)
         });
 
 
