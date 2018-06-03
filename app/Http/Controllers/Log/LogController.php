@@ -18,8 +18,7 @@ class LogController extends Controller
     public  function index(Team $team, Request $request)
     {
         $logs = Log::filters()
-            ->where('team_id', $team->id)
-            ->orderBy('created_at','desc');
+            ->where('team_id', $team->id);
 
         $groupRemoteAddress = Log::filters()
             ->select('remote_address',DB::raw('count(remote_address) as count'))
@@ -33,6 +32,17 @@ class LogController extends Controller
             $groupRemoteAddress->where('message','like','%'.$request->get('search').'%');
         }
 
+
+        if($request->has('start_created_at')){
+            //dd($request->get('start_created_at'));
+            $logs->where('created_at', '>', $request->get('start_created_at'));
+        }
+
+        if($request->has('end_created_at')){
+            $logs->where('created_at', '<', $request->get('end_created_at'));
+        }
+
+
         $tags = $request->session()->get($team->slug.'-tags', []);
         foreach ($tags as $key => $tag){
             $tag = strval($tag);
@@ -41,11 +51,24 @@ class LogController extends Controller
             $groupRemoteAddress->where('message'.$key, $tag);
         }
 
+
+        $statictics = clone $logs;
+
+        $statictics
+            ->select(
+                DB::raw('DATE(`created_at`) as date'),
+                DB::raw('count(*) as count')
+                )
+            ->groupBy('date')
+            ->orderBy('date');
+
+
         return view('log.index', [
             'team'               => $team,
-            'logs'               => $logs->simplePaginate(),
+            'logs'               => $logs->orderBy('created_at', 'desc')->simplePaginate(),
             'groupRemoteAddress' => $groupRemoteAddress->get(),
             'tags'               => $tags,
+            'statictics'         => $statictics->get(),
         ]);
     }
 

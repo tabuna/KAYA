@@ -26,7 +26,7 @@ class Log extends Model
      * @var array
      */
     protected $casts = [
-        'message' => 'array'
+        'message' => 'array',
     ];
 
     /**
