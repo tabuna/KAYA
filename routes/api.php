@@ -12,4 +12,5 @@
 |
 */
 
-Route::any('/logs', 'Api\LoggerController@write')->name('api.logs.write');
+Route::any('/logs', 'Api\LoggerController@write')
+    ->name('api.logs.write');

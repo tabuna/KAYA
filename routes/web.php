@@ -36,3 +36,7 @@ Route::group(['prefix' => 'teams', 'namespace' => 'Teamwork'], function()
 Route::get('/demo', 'DemoApiController@index');
 Route::post('/demo', 'DemoApiController@send')
     ->name('demo.send');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

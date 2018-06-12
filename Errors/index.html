@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Обработка ошибки на JavaScript</title>
+
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic&subset=cyrillic">
+
+    <!-- Milligram CSS minified -->
+    <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+    <link rel="stylesheet" href="https://tabuna.github.io/style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css"/>
+
+
+</head>
+<body>
+
+
+
+<main class="wrapper print-hidden">
+
+
+    <div class="container">
+        <article class="padder-v">
+
+            <h3><i class="icon icon-briefcase"></i> Пример обработки ошибки на JavaScript</h3>
+
+            <p>
+                Прослушивать событие onerror можно, назначив window.onerror функцию, играющую роль обработчика ошибок:
+            </p>
+
+           <pre>
+    window.onerror = function(msg, url, lineNo, columnNo, error) {
+        // ... обработка ошибки ...
+        return false;
+    }</pre>
+
+            <p>
+                Эта функция вызывается при возникновении ошибки, ей передаются следующие аргументы:
+            </p>
+
+            <ul>
+                <li><code>msg</code> — сообщение ошибки. Например — <code>Uncaught ReferenceError: foo is not defined</code>.</li>
+                <li><code>url</code> — адрес скрипта или документа, в котором произошла ошибка. Например — <code>/dist/app.js</code>.</li>
+                <li><code>lineNo</code> — номер строки, в которой произошла ошибка (если поддерживается).</li>
+                <li><code>columnNo</code> — номер столбца строки (если поддерживается).</li>
+                <li><code>error</code> — объект ошибки (если поддерживается).</li>
+            </ul>
+
+            <p>
+               Минималистический обработчик:
+            </p>
+
+
+            <pre>
+    window.onerror = function(msg, url, lineNo, columnNo, error) {
+
+        const name  = '';
+        const token = '';
+
+        let message = {
+            name: msg,
+            url:  url,
+            lineNo: lineNo,
+            columnNo: columnNo,
+            error: error,
+            // Можно расширить или уменьшить количество данных,
+            // например добавить передачу информацию о браузере, языковых настройках и т.п.
+            userAgent: navigator.userAgent,
+            userLanguage: navigator.language
+        }
+
+        let http = new XMLHttpRequest();
+        http.open('POST', '//kaya.orchid.software/api/log');
+        http.send({
+            'name': name,
+            'token': token,
+            'message': JSON.stringify(message)
+        })
+
+        // после отправки запроса возможны обработки в зависимости от ответа сервера
+        // в большинстве случаев этого не требуется, так как исключение не выйдет за песочницу
+        // Что бы это условие выполнялось, необходимо указать в  http.open третий параметр со значением false
+        // так как по умолчанию запросы идут асинхронно.
+        if (http.status != 200) {
+          // обработать ошибку отдельно
+          alert( 'Отчёт об ошибки не был отправлен' );
+        }
+
+        // Сценарий будет выполняться в любом случаи, что бы не засорять память, пометим эту ошибку как обработанную
+        return false;
+    }</pre>
+
+
+        </article>
+    </div>
+
+
+
+
+</main>
+
+
+<div class="opacity-scroll"></div>
+
+
+
+</body>
+</html>

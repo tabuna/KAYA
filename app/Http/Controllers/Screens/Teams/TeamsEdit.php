@@ -10,9 +10,9 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Mpociot\Teamwork\Facades\Teamwork;
-use Orchid\Platform\Screen\Layouts;
-use Orchid\Platform\Screen\Link;
-use Orchid\Platform\Screen\Screen;
+use Orchid\Screen\Layouts;
+use Orchid\Screen\Link;
+use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Alert;
 
 class TeamsEdit extends Screen

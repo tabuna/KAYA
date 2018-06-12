@@ -2,8 +2,8 @@
 
 namespace App\Layouts;
 
-use Orchid\Platform\Fields\Field;
-use Orchid\Platform\Layouts\Rows;
+use Orchid\Screen\Fields\Field;
+use Orchid\Screen\Layouts\Rows;
 
 class TeamsCreate extends Rows
 {

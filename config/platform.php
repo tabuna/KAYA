@@ -50,7 +50,7 @@ return [
 
     'middleware' => [
         'public'  => ['web'],
-        'private' => ['web', 'platform'],
+        'private' => ['web', 'auth', 'platform'],
     ],
 
     /*
@@ -63,7 +63,7 @@ return [
     */
 
     'auth' => [
-        'display' => true,
+        'display' => false,
         'image'   => '/wallpaper.jpg',
         'slogan'  => 'Унифицированный анализ и мониторинг журналов',
     ],
@@ -79,20 +79,20 @@ return [
     */
 
     'fields' => [
-        'textarea'     => Orchid\Platform\Fields\Types\TextAreaField::class,
-        'input'        => Orchid\Platform\Fields\Types\InputField::class,
-        'tags'         => Orchid\Platform\Fields\Types\TagsField::class,
-        'select'       => Orchid\Platform\Fields\Types\SelectField::class,
-        'relationship' => Orchid\Platform\Fields\Types\RelationshipField::class,
-        'place'        => Orchid\Platform\Fields\Types\PlaceField::class,
-        'picture'      => Orchid\Platform\Fields\Types\PictureField::class,
-        'datetime'     => Orchid\Platform\Fields\Types\DateTimerField::class,
-        'checkbox'     => Orchid\Platform\Fields\Types\CheckBoxField::class,
-        'wysiwyg'      => Orchid\Platform\Fields\Types\TinyMCEField::class,
-        'password'     => Orchid\Platform\Fields\Types\PasswordField::class,
-        'markdown'     => Orchid\Platform\Fields\Types\SimpleMDEField::class,
-        'label'        => Orchid\Platform\Fields\Types\LabelField::class,
-        'upload'       => Orchid\Platform\Fields\Types\UploadField::class,
+        'textarea'     => Orchid\Screen\Fields\Types\TextAreaField::class,
+        'input'        => Orchid\Screen\Fields\Types\InputField::class,
+        'tags'         => Orchid\Screen\Fields\Types\TagsField::class,
+        'select'       => Orchid\Screen\Fields\Types\SelectField::class,
+        'relationship' => Orchid\Screen\Fields\Types\RelationshipField::class,
+        'place'        => Orchid\Screen\Fields\Types\PlaceField::class,
+        'picture'      => Orchid\Screen\Fields\Types\PictureField::class,
+        'datetime'     => Orchid\Screen\Fields\Types\DateTimerField::class,
+        'checkbox'     => Orchid\Screen\Fields\Types\CheckBoxField::class,
+        'wysiwyg'      => Orchid\Screen\Fields\Types\TinyMCEField::class,
+        'password'     => Orchid\Screen\Fields\Types\PasswordField::class,
+        'markdown'     => Orchid\Screen\Fields\Types\SimpleMDEField::class,
+        'label'        => Orchid\Screen\Fields\Types\LabelField::class,
+        'upload'       => Orchid\Screen\Fields\Types\UploadField::class,
     ],
 
     /*

@@ -4,15 +4,15 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-5">
-            <div class="m-t-lg">
-                <div class="">{{ __('Login') }}</div>
+            <div class="m-t-lg bg-white b box-shadow-lg wrapper">
+                <div class="">{{ __('Войти') }}</div>
 
                 <div class="">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="email" class="col-sm-12 col-form-label">{{ __('E-Mail Address') }}</label>
+                            <label for="email" class="col-sm-12 col-form-label">{{ __('E-Mail Адрес') }}</label>
 
                             <div class="col-md-12">
                                 <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
@@ -26,7 +26,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-12 col-form-label">{{ __('Password') }}</label>
+                            <label for="password" class="col-md-12 col-form-label">{{ __('Пароль') }}</label>
 
                             <div class="col-md-12">
                                 <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
@@ -43,7 +43,7 @@
                             <div class="col-md-12 offset-md-12">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> {{ __('Remember Me') }}
+                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> {{ __('Запомнить меня') }}
                                     </label>
                                 </div>
                             </div>
@@ -52,11 +52,11 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
+                                    {{ __('Войти') }}
                                 </button>
 
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ __('Forgot Your Password?') }}
+                                    {{ __('Забыли пароль?') }}
                                 </a>
                             </div>
                         </div>

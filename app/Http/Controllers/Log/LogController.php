@@ -17,10 +17,9 @@ class LogController extends Controller
      */
     public  function index(Team $team, Request $request)
     {
-        $logs = Log::filters()
-            ->where('team_id', $team->id);
+        $logs = $team->log()->filters()->where('team_id', $team->id);
 
-        $groupRemoteAddress = Log::filters()
+        $groupRemoteAddress = $team->log()->filters()
             ->select('remote_address',DB::raw('count(remote_address) as count'))
             ->where('team_id', $team->id)
             ->groupBy('remote_address')
@@ -31,7 +30,6 @@ class LogController extends Controller
             $logs->where('message','like','%'.$request->get('search').'%');
             $groupRemoteAddress->where('message','like','%'.$request->get('search').'%');
         }
-
 
         if($request->has('start_created_at')){
             //dd($request->get('start_created_at'));

@@ -6,9 +6,9 @@ use App\Layouts\TeamsCreate;
 use App\Layouts\TeamsTable;
 use App\Team;
 use Illuminate\Http\Request;
-use Orchid\Platform\Screen\Layouts;
-use Orchid\Platform\Screen\Link;
-use Orchid\Platform\Screen\Screen;
+use Orchid\Screen\Layouts;
+use Orchid\Screen\Link;
+use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Alert;
 
 class TeamsList extends Screen

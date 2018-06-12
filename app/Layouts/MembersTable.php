@@ -3,8 +3,8 @@
 namespace App\Layouts;
 
 use App\User;
-use Orchid\Platform\Layouts\Table;
-use Orchid\Platform\Fields\TD;
+use Orchid\Screen\Layouts\Table;
+use Orchid\Screen\Fields\TD;
 
 class MembersTable extends Table
 {
