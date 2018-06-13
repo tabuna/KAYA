@@ -1607,12 +1607,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchidsoftware/platform.git",
-                "reference": "5a40aab190f30741ea9a0d14914445b14b5d0bab"
+                "reference": "61d4e2a574b02072830077e5224eaea5a1b667f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchidsoftware/platform/zipball/5a40aab190f30741ea9a0d14914445b14b5d0bab",
-                "reference": "5a40aab190f30741ea9a0d14914445b14b5d0bab",
+                "url": "https://api.github.com/repos/orchidsoftware/platform/zipball/61d4e2a574b02072830077e5224eaea5a1b667f2",
+                "reference": "61d4e2a574b02072830077e5224eaea5a1b667f2",
                 "shasum": ""
             },
             "require": {
@@ -1684,7 +1684,7 @@
                 "orchid",
                 "platform"
             ],
-            "time": "2018-06-12T17:58:46+00:00"
+            "time": "2018-06-13T01:19:51+00:00"
         },
         {
             "name": "paragonie/random_compat",
