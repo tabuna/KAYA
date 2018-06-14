@@ -9,10 +9,8 @@ class TeamEdit extends Rows
 {
 
     /**
-     * Views
-     *
      * @return array
-     * @throws \Orchid\Platform\Exceptions\TypeException
+     * @throws \Throwable
      */
     public function fields(): array
     {

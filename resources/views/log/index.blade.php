@@ -70,7 +70,7 @@
                 </div>
             @endif
 
-            <div class="wrapper-md bg-white">
+            <div class="wrapper-md bg-white" style="min-height: calc(100% - 200px);">
                 @foreach($logs as $log)
                     <div class="row m-b-md b-b">
                         <div class="col-sm-12 m-b">
@@ -90,6 +90,11 @@
                     </div>
                 @endforeach
             </div>
+
+            <div class="wrapper center">
+                {{ $logs->links() }}
+            </div>
+
         </div>
     </div>
 

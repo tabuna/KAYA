@@ -10,6 +10,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Mpociot\Teamwork\Facades\Teamwork;
+use Orchid\Platform\Notifications\DashboardNotification;
 use Orchid\Screen\Layouts;
 use Orchid\Screen\Link;
 use Orchid\Screen\Screen;
@@ -35,12 +36,13 @@ class TeamsEdit extends Screen
      * Query data
      *
      * @param Team|null $team
+     *
      * @return array
      */
-    public function query(Team $team = null) : array
+    public function query(Team $team = null): array
     {
         return [
-            'team' => $team,
+            'team'  => $team,
             'users' => $team->users()->paginate(),
         ];
     }
@@ -50,7 +52,7 @@ class TeamsEdit extends Screen
      *
      * @return array
      */
-    public function commandBar() : array
+    public function commandBar(): array
     {
         $commandBar = [
             Link::name('Пригласить пользователя')
@@ -65,7 +67,7 @@ class TeamsEdit extends Screen
         ];
 
 
-        if(auth()->user()->isOwnerOfTeam($this->arguments[0])){
+        if (auth()->user()->isOwnerOfTeam($this->arguments[0])) {
             $commandBar[] = Link::name('Удалить')
                 ->slug('project')
                 ->icon('icon-check m-r-xs')
@@ -82,7 +84,7 @@ class TeamsEdit extends Screen
      * @return array
      * @throws \Orchid\Press\TypeException
      */
-    public function layout() : array
+    public function layout(): array
     {
         return [
             Layouts::columns([
@@ -91,12 +93,12 @@ class TeamsEdit extends Screen
                 ],
                 [
                     TeamEdit::class,
-                ]
+                ],
             ]),
             Layouts::modals([
-                'invite' =>[
-                     TeamsInvite::class
-                 ]
+                'invite' => [
+                    TeamsInvite::class,
+                ],
             ]),
         ];
     }
@@ -106,6 +108,7 @@ class TeamsEdit extends Screen
      *
      * @param Team    $team
      * @param Request $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Team $team, Request $request)
@@ -119,6 +122,7 @@ class TeamsEdit extends Screen
 
     /**
      * @param Team $team
+     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      * @throws \Exception
      */
@@ -142,28 +146,38 @@ class TeamsEdit extends Screen
     /**
      * @param Team    $team
      * @param Request $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function invite(Team $team, Request $request)
     {
-
-        if( !Teamwork::hasPendingInvite( $request->email, $team) )
-        {
-            Teamwork::inviteToTeam( $request->email, $team, function( $invite )
-            {
-                Mail::send('teamwork.emails.invite', ['team' => $invite->team, 'invite' => $invite], function ($m) use ($invite) {
-                    $m->to($invite->email)->subject('Invitation to join team '.$invite->team->name);
-                });
-                // Send email to user
-            });
-
-            Alert::success('Пользователь был приглашён');
-            return back();
+        if (Teamwork::hasPendingInvite($request->email, $team)) {
+            return redirect()->back()->withErrors([
+                'email' => 'Пользователь с такой электронной почты уже приглашен в команду.',
+            ]);
         }
 
-        return redirect()->back()->withErrors([
-            'email' => 'Пользователь с такой электронной почты уже приглашен в команду.'
-        ]);
+        Teamwork::inviteToTeam($request->email, $team, function ($invite) use ($request) {
+            $user = User::where('email', $request->email)->first();
+
+            if (!is_null($user)) {
+                $user->notify(new DashboardNotification([
+                    'title'   => "Приглашение в группу '{$invite->team->name}'",
+                    'message' => 'Перейдите по ссылке',
+                    'action'  => route('teams.accept_invite', $invite->accept_token),
+                    'type'    => 'info',
+                ]));
+            }
+
+            Mail::send('teamwork.emails.invite', ['team' => $invite->team, 'invite' => $invite], function ($m) use ($invite) {
+                $m->to($invite->email)->subject('Invitation to join team ' . $invite->team->name);
+            });
+            // Send email to user
+        });
+
+        Alert::success('Пользователь был приглашён');
+        return back();
     }
+
 
 }
