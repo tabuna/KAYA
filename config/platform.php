@@ -106,6 +106,7 @@ return [
 
     'main_widgets' => [
         Orchid\Platform\Http\Widgets\UpdateWidget::class,
+        \App\Http\Widgets\DiffProject::class,
     ],
 
     /*

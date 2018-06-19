@@ -11,7 +11,7 @@
 
                 @foreach($groupRemoteAddress as $log)
                     <li class="list-group-item" style="border-right: none">
-                        <a href='javascript:;' class="block">
+                        <a href='?remote_address={{$log->remote_address}}' class="block">
                             <span class="badge bg-dark text-white pull-right">{{$log->count}}</span>
                             {{$log->remote_address}}
                         </a>
@@ -29,7 +29,7 @@
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <button class="btn btn-default" type="submit"><i class="icon-filter"></i></button>
-                            <button class="btn btn-default" type="button"><i class="icon-doc"></i></button>
+                            <button onclick="window.location.href = window.location.pathname" class="btn btn-default" type="button"><i class="icon-doc"></i></button>
                         </div>
                         <div class="input-group-prepend">
                             <input type='text'
@@ -65,9 +65,38 @@
             </div>
 
             @if(count($statictics) > 1)
-                <div class="wrapper-xs bg-white b-b">
-                    <div id="chart"></div>
+
+
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab"
+                           data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"
+                           onclick="initResize()"
+                        >
+                            По дням</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile"
+                           role="tab" aria-controls="profile" aria-selected="false" onclick="initResize()">
+                            По месяцам</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="wrapper-xs bg-white b-b">
+                            <div id="chart"></div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="wrapper-xs bg-white b-b">
+                            <div id="chart2"></div>
+                        </div>
+                    </div>
                 </div>
+
+
+
+
             @endif
 
             <div class="wrapper-md bg-white" style="min-height: calc(100% - 200px);">
@@ -98,7 +127,18 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/frappe-charts@1.1.0/dist/frappe-charts.min.iife.js"></script>
+    <!-- or -->
+    <script src="https://unpkg.com/frappe-charts@1.1.0/dist/frappe-charts.min.iife.js"></script>
     <script>
+
+        function initResize(){
+            setTimeout(function () {
+                window.dispatchEvent(new Event('resize'));
+            }, 200);
+        }
+
+
         document.addEventListener('turbolinks:load', function () {
             $('.addTags').click(function () {
                 axios({
@@ -125,8 +165,8 @@
                 });
             });
 
-
-            new Chart({
+/*
+            new frappe.Chart({
                 parent: "#chart",
                 data: {
                     labels: [
@@ -149,10 +189,66 @@
                 title: "Статистика за последние дни",
                 type: 'bar',
                 height: 200,
-
                 colors: [
                     '#ac5ca0',
                 ]
+            });
+*/
+
+            const sometimes = {
+                labels: [
+                    @foreach($statictics as $statictic)
+                        "{{$statictic->date}}",
+                    @endforeach
+                ],
+                datasets: [
+                    {
+                        name: "Some Data",
+                        chartType: 'bar',
+                        values: [
+                            @foreach($statictics as $statictic)
+                            {{$statictic->count}},
+                            @endforeach
+                        ]
+                    },
+                ]
+            };
+
+            const data = {
+                labels: [
+                    @foreach($staticsForYear as $statictic)
+                        "{{$statictic['name']}}",
+                    @endforeach
+                ],
+                datasets: [
+                    {
+                        name: "Some Data",
+                        chartType: 'bar',
+                        values: [
+                            @foreach($staticsForYear as $statictic)
+                            {{$statictic['count']}},
+                            @endforeach
+                        ]
+                    },
+                ]
+            };
+
+
+            new frappe.Chart("#chart", {  // or a DOM element,
+                title: "Статистика за последние дни",
+                data: sometimes,
+                type: 'axis-mixed', // or 'bar', 'line', 'scatter', 'pie', 'percentage'
+                height: 250,
+                colors: ['#ac5ca0','#7cd6fd', '#743ee2']
+            });
+
+
+            new frappe.Chart("#chart2", {  // or a DOM element,
+                title: "Статистика за год",
+                data: data,
+                type: 'bar', // or 'bar', 'line', 'scatter', 'pie', 'percentage'
+                height: 250,
+                colors: ['#ac5ca0','#7cd6fd', '#743ee2']
             });
 
 
